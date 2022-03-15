@@ -1,0 +1,10 @@
+scenarios:
+  - flow:
+      - log: "Create user"
+      - function: "getUserPayload"
+      - post:
+          url: "/users"
+          json: "{{payload}}"
+          expect:
+            - statusCode: 200
+      - think: 2

@@ -1,0 +1,48 @@
+config:
+  includeFiles:
+    - "../data/user.json"
+  plugins:
+    metrics-by-endpoint: {}
+    expect: {
+      #  Can be pretty, prettyError, json, silent
+      outputFormat: "json"
+    }
+  tls:
+    # Set to false to disable certificate validation. For Stage and Dev use only. Set to True for prod
+    rejectUnauthorized: false
+  http:
+    # Timeout of request before failing a scenario
+    timeout: 1200
+
+    # Set to 1 to handle rate limiter but in return, test duration will be much longer.
+    # This setting can help emulate the conditions when the target is behind a load-balancer and
+    # would have a fixed number of connections established at any given time
+    # pool: 3
+
+    # By default, Artillery creates one TCP connection per virtual user. You may change this by specifying in maxSockets
+    # maxSockets: 5
+  
+  # This is the default target when nothing has been set in CLI.
+  target: "http://localhost"
+  processor: "../custom_functions.cjs"
+  phases:
+    - duration: 5
+      arrivalCount: 10
+      name: Warm up
+
+    # - duration: 10
+    #   arrivalCount: 50
+    #   name: Normal load
+
+  environments:
+    stage:
+      target: "https://reqres.in/api"
+
+  # Setup defaults here. e.g. default request headers
+  # defaults:
+
+  # Setup variables here
+  variables:
+
+# Setup all necessary actions before executing tests here (e.g. getting auth token)
+before:

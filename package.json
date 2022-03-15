@@ -1,0 +1,35 @@
+{
+  "name": "load-test-artilleryio",
+  "version": "1.0.0",
+  "description": "Load test using ArtilleryIO",
+  "main": "index.js",
+  "type": "module",
+  "dependencies": {
+    "artillery": "^2.0.0-8",
+    "artillery-plugin-metrics-by-endpoint": "^1.0.2",
+    "artillery-plugin-expect": "^2.0.0",
+    "artillery-pro": "^3.0.0-3",
+    "axios": "^0.21.1",
+    "lodash": "^4.17.21",
+    "yargs": "^17.1.1"
+  },
+  "scripts": {
+    "test:get_users_normal": "artillery run tests/get_users.yml --config config/normal_load.yml --environment stage --output reports/get_users_normal",
+    "report:get_users_normal": "artillery report reports/get_users_normal && open reports/get_users_normal.html",
+    "test:create_user_normal": "artillery run tests/create_user.yml --config config/normal_load.yml --environment stage --output reports/create_user",
+    "report:create_user_normal": "artillery report reports/create_user && open reports/create_user.html"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/momenthouse/automated-performance-testing.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/momenthouse/automated-performance-testing/issues"
+  },
+  "homepage": "https://github.com/momenthouse/automated-performance-testing#readme",
+  "devDependencies": {
+    "artillery-plugin-expect": "^2.0.0-3"
+  }
+}

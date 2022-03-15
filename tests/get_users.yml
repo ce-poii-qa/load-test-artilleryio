@@ -1,0 +1,8 @@
+scenarios:
+  - flow:
+      - log: "Get user list"
+      - get:
+          url: "/users?page=2"
+          expect:
+            - statusCode: 201
+      - think: 2
