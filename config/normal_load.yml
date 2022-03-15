@@ -7,6 +7,9 @@ config:
       #  Can be pretty, prettyError, json, silent
       outputFormat: "json"
     }
+    ensure: {
+      maxErrorRate: 5
+    }
   tls:
     # Set to false to disable certificate validation. For Stage and Dev use only. Set to True for prod
     rejectUnauthorized: false
