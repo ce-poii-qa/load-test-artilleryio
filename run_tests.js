@@ -15,18 +15,16 @@ async function runLoadTest(
   let output = {};
 
   try {
-    console.log("Running test: ", scenario);
-    console.log("Running config: ", config);
-
-    const scriptCommand = `artillery run --config config/${config}.yml --environment stage --output reports/${scenario} 
+    const scriptCommand = 
+    `artillery run --config config/${config}.yml --environment stage --output reports/${scenario} 
     && artillery report reports/${scenario}
     && open reports/${scenario}`;
-    
+
     console.log("Running script command: ", scriptCommand);
     
-    await sendSlackMessage(
-    `Running load test command: ${scriptCommand}`
-    );
+    // await sendSlackMessage(
+    // `Running load test command: ${scriptCommand}`
+    // );
     
     await exec(scriptCommand);
   } catch (err) {
@@ -34,10 +32,10 @@ async function runLoadTest(
   }
 
 
-  await sendSlackMessage(
-    `Load test run has been finished.
-    stdout ${output.stdout} | stderr ${output.stderr}`
-  );
+  // await sendSlackMessage(
+  //   `Load test run has been finished.
+  //   stdout ${output.stdout} | stderr ${output.stderr}`
+  // );
 
   return output;
 }

@@ -4,5 +4,5 @@ scenarios:
       - get:
           url: "/users?page=2"
           expect:
-            - statusCode: 201
+            - statusCode: 200
       - think: 2
