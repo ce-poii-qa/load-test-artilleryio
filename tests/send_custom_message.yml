@@ -1,0 +1,27 @@
+# Sends a custom message via Agora Chat endpoint /sendCustomMessage
+# Gets payload from /data/agora_chat.json
+
+scenarios:
+  - flow:
+      - log: "Send custom message {{ $environment }}"
+      - function: "getAgoraChatPayload"
+      
+      # Sends a post request to /sendCustomMessage and using function getAgoraChatPayload returned value "payload" as request payload
+      - post:
+          url: "/Message/sendCustomMessage"
+          json: "{{ payload }}"
+          
+          # Captures the response.body.code value and save it as a variable named "code"
+          capture:
+            - json: "$.code"
+              as: code
+          
+          # Assertions. response.statusCode is different from response.body.code based on API implementation
+          expect:
+          - statusCode: 200
+          - equals:
+            - "{{ code }}"
+            - 200
+      
+      # Pauses for 1 second after sending post request
+      - think: 1

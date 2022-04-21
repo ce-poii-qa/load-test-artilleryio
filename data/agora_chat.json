@@ -1,0 +1,12 @@
+{
+	"argv": ["chatgroups", ["grp_QkfqA2QhcpNmot2g"], 5012, {
+		"json": "",
+		"time": "1636453086000",
+		"guid": "grp_QkfqA2QhcpNmot2g",
+		"pushText": " group info update",
+		"conversation": "1",
+		"isPush": "2",
+		"type": "5012"
+	}],
+	"sign": "294d4572de01c3a2b64bd9103ba6f748"
+}

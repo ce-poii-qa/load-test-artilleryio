@@ -6,5 +6,5 @@ scenarios:
           url: "/users"
           json: "{{payload}}"
           expect:
-            - statusCode: 200
+            - statusCode: 201
       - think: 2

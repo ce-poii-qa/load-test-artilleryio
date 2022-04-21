@@ -7,17 +7,20 @@
   "dependencies": {
     "artillery": "^2.0.0-8",
     "artillery-plugin-metrics-by-endpoint": "^1.0.2",
-    "artillery-plugin-expect": "^2.0.0",
     "artillery-pro": "^3.0.0-3",
     "axios": "^0.21.1",
     "lodash": "^4.17.21",
     "yargs": "^17.1.1"
   },
   "scripts": {
-    "test:get_users_normal": "artillery run tests/get_users.yml --config config/normal_load.yml --environment stage --output reports/get_users_normal",
-    "report:get_users_normal": "artillery report reports/get_users_normal && open reports/get_users_normal.html",
-    "test:create_user_normal": "artillery run tests/create_user.yml --config config/normal_load.yml --environment stage --output reports/create_user",
-    "report:create_user_normal": "artillery report reports/create_user && open reports/create_user.html"
+    "test:get_users_normal": "artillery run tests/get_users.yml --config config/normal.yml --environment reqres --output reports/get_users",
+    "report:get_users": "artillery report reports/get_users && open reports/get_users.html",
+    "test:create_user_normal": "artillery run tests/create_user.yml --config config/normal.yml --environment reqres --output reports/create_user",
+    "report:create_user": "artillery report reports/create_user && open reports/create_user.html",
+    "test:send_custom_message_normal": "artillery run tests/send_custom_message.yml --config config/normal.yml --environment stage-agora --output reports/send_custom_message",
+    "test:send_custom_message_debug": "artillery run tests/send_custom_message.yml --config config/debug.yml --environment stage-agora --output reports/send_custom_message",
+    "report:send_custom_message": "DEBUG=plugin:expect artillery report reports/send_custom_message && open reports/send_custom_message.html",
+    "test:custom_sample": "node run_test.js --scenario=send_custom_message --config=debug --env=stage-agora"
   },
   "repository": {
     "type": "git",
@@ -30,6 +33,8 @@
   },
   "homepage": "https://github.com/momenthouse/automated-performance-testing#readme",
   "devDependencies": {
-    "artillery-plugin-expect": "^2.0.0-3"
+    "artillery-plugin-ensure": "^1.1.1",
+    "artillery-plugin-expect": "^2.0.0-3",
+    "dotenv": "^16.0.0"
   }
 }

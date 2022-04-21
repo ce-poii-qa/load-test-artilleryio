@@ -8,7 +8,7 @@ config:
       outputFormat: "json"
     }
     ensure: {
-      maxErrorRate: 5
+      maxErrorRate: 0
     }
   tls:
     # Set to false to disable certificate validation. For Stage and Dev use only. Set to True for prod
@@ -27,22 +27,22 @@ config:
   
   # This is the default target when nothing has been set in CLI.
   target: "http://localhost"
-  processor: "../custom_functions.cjs"
   phases:
-    - duration: 5
-      arrivalCount: 10
-      name: Warm up
-
-    # - duration: 10
-    #   arrivalCount: 50
-    #   name: Normal load
+    - duration: 10
+      arrivalCount: 5
+      name: Debug mode
 
   environments:
-    stage:
+    reqres:
       target: "https://reqres.in/api"
+    stage-agora:
+      target: "https://stage-agorachat.kumuapi.com/v1"
 
   # Setup defaults here. e.g. default request headers
   # defaults:
+
+  # Import custom functions file
+  processor: "../custom_functions.cjs"
 
   # Setup variables here
   variables:

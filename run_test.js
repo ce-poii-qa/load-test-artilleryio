@@ -10,15 +10,15 @@ const exec = util.promisify(child_process.exec);
 
 async function runLoadTest(
   scenario = "get_users",
-  config = "normal"
+  config = "normal",
+  env = "reqres"
 ) {
   let output = {};
 
+  let localPath = 'node_modules/.bin'
   try {
     const scriptCommand = 
-    `artillery run --config config/${config}.yml --environment stage --output reports/${scenario} 
-    && artillery report reports/${scenario}
-    && open reports/${scenario}`;
+    `${localPath}/artillery run tests/${scenario}.yml --config config/${config}.yml --environment ${env} --output reports/${scenario} && ${localPath}/artillery report reports/${scenario} && open reports/${scenario}.html`;
 
     console.log("Running script command: ", scriptCommand);
     
@@ -31,17 +31,17 @@ async function runLoadTest(
     console.error(err);
   }
 
-
   // await sendSlackMessage(
   //   `Load test run has been finished.
   //   stdout ${output.stdout} | stderr ${output.stderr}`
   // );
 
+  console.log(output.stdout)
   return output;
 }
 
 async function main() {
-  const output = await runLoadTest(argv.count, argv.page, argv.config);
+  const output = await runLoadTest(argv.scenario, argv.config, argv.env);
 }
 
 main();
